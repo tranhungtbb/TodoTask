@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:page="clr-namespace:TodoTask.Converters"
+             x:Class="TodoTask.Views.ListTask">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <page:PriorityConverter x:Key="priorityConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+
+        <StackLayout Spacing="0">
+            <FlexLayout BackgroundColor="#C8C8C8" Padding="21,100,27,21" Margin="0">
+                <Image>
+                    <Image.Source>
+                        <FontImageSource
+                        FontFamily="FASolid"
+                        Glyph="&#xf0c9;"
+                        Size="20"/>
+                    </Image.Source>
+                </Image>
+
+                <Label Text="Tasks"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       FontFamily="DMSansMedium"
+                       TextColor="#21262C"
+                       FontSize="32"
+                       FlexLayout.Grow="1" FontAttributes="Bold"/>
+
+                <Image>
+                    <Image.Source>
+                        <FontImageSource
+                        FontFamily="FARegular"
+                        Glyph="&#xf133;"
+                        Size="20"/>
+                    </Image.Source>
+                </Image>
+            </FlexLayout>
+
+            <ListView x:Name="listTask" Margin="21,24,21,24"
+                  ItemsSource="{Binding GroupTask}"
+                      IsGroupingEnabled="true">
+
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding Group}" />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+
+                <ListView.ItemTemplate>
+
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+
+                                <CheckBox Color="#21262C" />
+
+                                <Label Text="{ Binding Description }"
+                                               TextColor="#21262C"
+                                               FontFamily="DMSansMedium"
+                                            VerticalTextAlignment="Center"
+                                            HorizontalOptions="StartAndExpand" />
+
+                                <Ellipse Fill="{Binding Priority,
+                                        Converter={StaticResource priorityConverter}}"
+                                     WidthRequest="14"
+                                     HeightRequest="14"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="Center" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                    
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+
+    </ContentPage.Content>
+
+</ContentPage>
