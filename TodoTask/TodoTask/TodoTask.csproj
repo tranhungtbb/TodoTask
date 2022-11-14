@@ -16,11 +16,28 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\Home.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resource\dm-sans-medium.ttf" />
+    <EmbeddedResource Include="Resource\dm-sans-regular.ttf" />
+    <EmbeddedResource Include="Resource\fa-regular-400.ttf" />
+    <EmbeddedResource Include="Resource\fa-solid.otf" />
+    <EmbeddedResource Include="Resource\FontAwesome6Brands-Regular-400.otf" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Update="Views\ListTask.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resource\" />
+    <None Remove="Resource\dm-sans-medium.ttf" />
+    <None Remove="Resource\dm-sans-regular.ttf" />
+    <None Remove="Resource\fa-regular-400.ttf" />
+    <None Remove="Resource\fa-solid.otf" />
+    <None Remove="Resource\FontAwesome6Brands-Regular-400.otf" />
+    <None Remove="Controls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resource\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
 </Project>

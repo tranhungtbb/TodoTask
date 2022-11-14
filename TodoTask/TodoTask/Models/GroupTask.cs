@@ -8,6 +8,6 @@ namespace TodoTask.Models
     public class GroupTask : List<Task>
     {
         public EnumTaskGroup Group { get; set; }
-        public List<Task> Tasks { get; set; }
+        public List<Task> Items => this;
     }
 }

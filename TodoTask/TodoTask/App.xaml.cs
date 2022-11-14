@@ -11,7 +11,7 @@ namespace TodoTask
         {
             InitializeComponent();
 
-            MainPage = new Home();
+            MainPage = new ListTask();
         }
 
         protected override void OnStart()

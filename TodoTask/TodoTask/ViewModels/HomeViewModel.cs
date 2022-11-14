@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using TodoTask.Consts;
@@ -9,61 +10,110 @@ namespace TodoTask.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
-        List<Task> today { get; set; }
+        public ObservableCollection<GroupTask> _groupTask { get; set; }
 
-        public List<Task> Todays
+        public ObservableCollection<GroupTask> GroupTask
         {
-            get => today;
+            get => _groupTask;
             set
             {
-                if (today == value)
+                if (_groupTask == value)
                     return;
 
-                today = value;
+                _groupTask = value;
                 OnPropertyChanged();
             }
         }
 
         public void Init()
         {
-            if (today == null || today.Count() == 0)
+            if (_groupTask == null || _groupTask.Count() == 0)
             {
-                Todays = new List<Models.Task>
-                {
-                    new Models.Task
+                GroupTask = new ObservableCollection<GroupTask>{
+                new GroupTask {
+                    Group = EnumTaskGroup.Today,
+                    Items = {
+                        new Task
+                        {
+                            Id = 1,
+                            TaskGroup = EnumTaskGroup.Today,
+                            Priority = EnumPriority.Hight,
+                            Description = "Watch 1 design masterclass",
+                            Repeat = new Repeat
+                            {
+                                Count = 2,
+                                RepeatType = EnumRepeatType.Month
+                            },
+                            Make = true,
+                            Time = DateTime.Now
+                        },
+                        new Task
+                        {
+                            Id = 1,
+                            TaskGroup = EnumTaskGroup.Today,
+                            Priority = EnumPriority.Medium,
+                            Description = "Feed the cat",
+                            Repeat = new Repeat
+                            {
+                                Count = 1,
+                                RepeatType = EnumRepeatType.Week
+                            },
+                            Make = true,
+                            Time = DateTime.Now.AddHours(20).AddMinutes(10)
+                        }
+                    }
+                },
+            new GroupTask
+            {
+                Group = EnumTaskGroup.Inbox,
+                Items = {
+                    new Task
                     {
                         Id = 1,
-                        TaskGroup = EnumTaskGroup.Today,
+                        TaskGroup = EnumTaskGroup.Inbox,
                         Priority = EnumPriority.Hight,
-                        Description = "Watch 1 design masterclass",
+                        Description = "Update portfolio",
                         Repeat = new Repeat
                         {
                             Count = 2,
-                            RepeatType = EnumRepeatType.Month
+                            RepeatType = EnumRepeatType.Day
                         },
                         Make = true,
                         Time = DateTime.Now
                     },
-                    new Models.Task
+                    new Task
                     {
                         Id = 1,
-                        TaskGroup = EnumTaskGroup.Upcoming,
+                        TaskGroup = EnumTaskGroup.Inbox,
                         Priority = EnumPriority.Medium,
-                        Description = "Feed the cat",
+                        Description = "Buy christmas presents for family, visit website for ideas",
                         Repeat = new Repeat
                         {
-                            Count = 1,
+                            Count = 2,
                             RepeatType = EnumRepeatType.Week
                         },
                         Make = true,
-                        Time = DateTime.Now.AddHours(20).AddMinutes(10)
+                        Time = DateTime.Now
+                    },
+                    new Task
+                    {
+                        Id = 1,
+                        TaskGroup = EnumTaskGroup.Inbox,
+                        Priority = EnumPriority.Low,
+                        Description = "Lunch",
+                        Repeat = new Repeat
+                        {
+                            Count = 1,
+                            RepeatType = EnumRepeatType.Day
+                        },
+                        Make = true,
+                        Time = DateTime.Now
                     }
-                };
-
-
+                }
+            }};
 
                 OnPropertyChanged();
-                
+
             }
         }
     }
