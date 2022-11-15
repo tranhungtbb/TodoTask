@@ -11,7 +11,7 @@ namespace TodoTask
         {
             InitializeComponent();
 
-            MainPage = new ListTask();
+            MainPage = new AppCell();
         }
 
         protected override void OnStart()

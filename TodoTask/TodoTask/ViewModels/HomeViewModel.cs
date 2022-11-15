@@ -3,13 +3,45 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
 using TodoTask.Consts;
 using TodoTask.Models;
+using TodoTask.Views;
+using Xamarin.CommunityToolkit.ObjectModel;
+using Xamarin.Forms;
 
 namespace TodoTask.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
+
+        private bool isOpen { get; set; }
+
+        public bool IsOpen
+        {
+            get => isOpen;
+            set
+            {
+                isOpen = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private TodoTask.Models.Task _selectedTask { get; set; }
+
+        public TodoTask.Models.Task SelectedTask
+        {
+            get => _selectedTask;
+            set
+            {
+                _selectedTask = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public IAsyncCommand<Task> ItemTask { get; set; }
+
         public ObservableCollection<GroupTask> _groupTask { get; set; }
 
         public ObservableCollection<GroupTask> GroupTask
@@ -23,6 +55,12 @@ namespace TodoTask.ViewModels
                 _groupTask = value;
                 OnPropertyChanged();
             }
+        }
+
+
+        public HomeViewModel() {
+
+            ItemTask = new AsyncCommand<Task>(OnSelectedItem);
         }
 
         public void Init()
@@ -115,6 +153,18 @@ namespace TodoTask.ViewModels
                 OnPropertyChanged();
 
             }
+        }
+
+
+
+        async System.Threading.Tasks.Task OnSelectedItem(Task item) {
+
+            if (item == null)
+                return;
+
+            // This will push the ItemDetailPage onto the navigation stack
+            await Shell.Current.GoToAsync($"{nameof(EditTask)}?{nameof(EditTaskViewModel.Id)}={item.Id}");
+
         }
     }
 }

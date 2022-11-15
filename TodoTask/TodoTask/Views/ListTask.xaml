@@ -15,186 +15,195 @@
             <page:GroupConverter
                 x:Key="groupConverter" />
         </ResourceDictionary>
-
     </ContentPage.Resources>
 
     <ContentPage.BindingContext>
         <vm:HomeViewModel/>
     </ContentPage.BindingContext>
 
+
+    <Shell.TitleView>
+        <Image Source="xamarin_logo.png"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+    </Shell.TitleView>
+
+
     <ContentPage.Content>
-        <StackLayout
-            Spacing="0">
-            <FlexLayout
-                BackgroundColor="#C8C8C8"
-                Padding="21,100,27,21"
-                Margin="0">
-                <Image>
+
+
+        <Grid
+            RowDefinitions="Auto,*">
+            <Grid
+                    BackgroundColor="#C8C8C8"
+                    Padding="21,100,27,21"
+                    Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0">
                     <Image.Source>
                         <FontImageSource
-                            FontFamily="FASolid"
-                            Glyph="&#xf0c9;"
-                            Size="20"/>
-                    </Image.Source>
-                </Image>
-
-                <Label Text="Tasks"
-                       HorizontalTextAlignment="Center"
-                       VerticalTextAlignment="Center"
-                       FontFamily="DMSansMedium"
-                       TextColor="#21262C"
-                       FontSize="32"
-                       FlexLayout.Grow="1"
-                       FontAttributes="Bold"/>
-
-                <Image>
-                    <Image.Source>
-                        <FontImageSource
-                            FontFamily="FARegular"
-                            Glyph="&#xf133;"
-                            Size="20"/>
-                    </Image.Source>
-                </Image>
-            </FlexLayout>
-
-            <Grid>
-                <ListView
-                    SeparatorVisibility="None"
-                    BackgroundColor="Transparent"
-                    x:Name="listTask" Margin="21,24,21,24"
-                    ItemsSource="{Binding GroupTask}"
-                    GroupDisplayBinding="{Binding Group}"
-                    IsGroupingEnabled="true"
-                    SeparatorColor="White"
-                    HasUnevenRows="True">
-
-                    <ListView.GroupHeaderTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Label
-                                    Text="{ Binding Group}"
-                                    FontAttributes="Bold"
-                                    TextColor="#21262C"
-                                    FontFamily="DMSansMedium"
-                                    BackgroundColor="White"
-                                    VerticalTextAlignment="Center" />
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.GroupHeaderTemplate>
-
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid
-                                    BackgroundColor="White"
-                                    x:DataType="models:Task">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <CheckBox
-                                        Grid.Column="0"
-                                        Color="#21262C" />
-
-                                    <StackLayout
-                                        Grid.Column="1"
-                                        VerticalOptions="Center">
-
-                                        <Label
-                                            Text="{ Binding Description}"
-                                            TextColor="#21262C"
-                                            FontFamily="DMSansMedium"
-                                            VerticalTextAlignment="Center"
-                                            HorizontalOptions="StartAndExpand"
-                                            MaxLines="2" />
-
-                                        <Label
-                                            Text="18h20"
-                                            TextColor="#21262C"
-                                            FontFamily="DMSansMedium"
-                                            VerticalTextAlignment="Center"
-                                            HorizontalOptions="StartAndExpand"
-                                            IsVisible="{Binding TaskGroup,Converter={StaticResource groupConverter}}"/>
-
-                                    </StackLayout>
-
-                                    <Ellipse
-                                        Grid.Column="2"
-                                        Fill="{Binding Priority,
-                                            Converter={StaticResource priorityConverter}}"
-                                         WidthRequest="14"
-                                         HeightRequest="14"
-                                         VerticalOptions="Center"
-                                         HorizontalOptions="Center" />
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-
-                    </ListView.ItemTemplate>
-                </ListView>
-
-                <Button
-                    HorizontalOptions="End"
-                    VerticalOptions="End" Margin="0,0,20,200"
-                    TextColor="White"
-                    BackgroundColor="#21262C"
-                    CornerRadius="30"
-                    WidthRequest="60"
-                    HeightRequest="60"
-                    Clicked="Button_Clicked"
-                    >
-                    <Button.ImageSource>
-                        <FontImageSource Color="White"
                                 FontFamily="FASolid"
-                                Glyph="&#x2b;"
-                                Size="25"/>
-                    </Button.ImageSource>
-                </Button>
+                                Glyph="&#xf0c9;"
+                                Size="20"/>
+                    </Image.Source>
+                </Image>
 
+                <Label Grid.Column="1"
+                        Text="Tasks"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        FontFamily="DMSansMedium"
+                        TextColor="#21262C"
+                        FontSize="32"
+                        FlexLayout.Grow="1"
+                        FontAttributes="Bold"/>
 
-                <controls:AddTaskControl x:Name="Sheet"
-                                         SheetHeight="300">
-                    <controls:AddTaskControl.SheetContent>
-                        <StackLayout BackgroundColor="Blue">
-                            <OnPlatform x:TypeArguments="View">
-                                <On Platform="iOS">
-                                    <Grid>
-                                        <BoxView CornerRadius="2.5"
-                                         BackgroundColor="Gray"
-                                         HorizontalOptions="Center"
-                                         VerticalOptions="Start"
-                                         HeightRequest="5"
-                                         WidthRequest="40"/>
-                                    </Grid>
-                                </On>
-                                <On Platform="Android">
-                                    <Grid>
-                                        <Image Source="chevrondown"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="Start"
-                                        WidthRequest="40"/>
-                                    </Grid>
-                                </On>
-                            </OnPlatform>
-
-                            <Label HorizontalTextAlignment="Center"
-                               Margin="0,20"
-                               Text="Welcome to Xamarin how to"
-                               FontSize="18"/>
-
-                            <Image Source="xhtlogo" HorizontalOptions="Center"/>
-
-                        </StackLayout>
-                    </controls:AddTaskControl.SheetContent>
-
-                </controls:AddTaskControl>
-
+                <Image
+                        Grid.Column="2">
+                    <Image.Source>
+                        <FontImageSource
+                                FontFamily="FARegular"
+                                Glyph="&#xf133;"
+                                Size="20"/>
+                    </Image.Source>
+                </Image>
 
             </Grid>
-        </StackLayout>
 
+            <Grid Grid.Row="1">
+                <StackLayout>
+                    <Grid>
+                        <ListView
+                            SeparatorVisibility="None"
+                            x:Name="listTask" Margin="21,24,21,24"
+                            ItemsSource="{Binding GroupTask}"
+                            GroupDisplayBinding="{Binding Group}"
+                            IsGroupingEnabled="true"
+                            SeparatorColor="White"
+                            HasUnevenRows="True"
+                            >
+
+                            <ListView.GroupHeaderTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Label
+                                        Text="{ Binding Group}"
+                                        FontAttributes="Bold"
+                                        TextColor="#21262C"
+                                        FontFamily="DMSansMedium"
+                                        BackgroundColor="White"
+                                        VerticalTextAlignment="Center" />
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.GroupHeaderTemplate>
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <Grid
+                                        BackgroundColor="White"
+                                        x:DataType="models:Task">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <CheckBox
+                                                Grid.Column="0"
+                                                Color="#21262C" IsEnabled="False" IsChecked="{ Binding Make }" />
+
+                                            <StackLayout
+                                            Grid.Column="1"
+                                            VerticalOptions="Center">
+
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        NumberOfTapsRequired="1"
+                                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}, Path=ItemTask}"		
+                                                        CommandParameter="{Binding .}"
+                                                        >
+                                                    </TapGestureRecognizer>
+                                                </StackLayout.GestureRecognizers>
+
+                                                <Label
+                                                Text="{ Binding Description}"
+                                                TextColor="#21262C"
+                                                FontFamily="DMSansMedium"
+                                                VerticalTextAlignment="Center"
+                                                HorizontalOptions="StartAndExpand"
+                                                MaxLines="2"/>
+
+                                                <Label
+                                                Text="18h20"
+                                                TextColor="#21262C"
+                                                FontFamily="DMSansMedium"
+                                                VerticalTextAlignment="Center"
+                                                HorizontalOptions="StartAndExpand"
+                                                IsVisible="{Binding TaskGroup,Converter={StaticResource groupConverter}}"/>
+
+                                            </StackLayout>
+
+                                            <Ellipse
+                                            Grid.Column="2"
+                                            Fill="{Binding Priority,
+                                                Converter={StaticResource priorityConverter}}"
+                                             WidthRequest="14"
+                                             HeightRequest="14"
+                                             VerticalOptions="Center"
+                                             HorizontalOptions="Center" />
+                                        </Grid>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+
+
+                </StackLayout>
+
+                <Frame
+                HorizontalOptions="End"
+                Padding="0"
+                HasShadow="False"
+                BackgroundColor="Black"
+                HeightRequest="60"
+                WidthRequest="60"
+                CornerRadius="30"
+                VerticalOptions="End" Margin="0,0,20,20"
+                >
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                    </Frame.GestureRecognizers>
+                    <Image VerticalOptions="Center">
+                        <Image.Source>
+                            <FontImageSource Color="White"
+                                FontFamily="FASolid"
+                                Glyph="&#x2b;"
+                                Size="27"/>
+                        </Image.Source>
+                    </Image>
+                </Frame>
+
+                <controls:AddTaskControl BackgroundColor="AliceBlue"
+                VerticalOptions="End"
+                x:Name="CustomBottomSheet" 
+                IsOpen="{Binding IsOpen}"
+                ContentPosition="Bottom"
+                Movement="BottomUp">
+                    <controls:AddTaskControl.GestureRecognizers>
+                        <SwipeGestureRecognizer
+                        Swiped="SwipeGestureRecognizer_Swiped"
+                        Direction="Down"/>
+                    </controls:AddTaskControl.GestureRecognizers>
+                </controls:AddTaskControl>
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 
 </ContentPage>

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bottomSheet:BaseBottomSheet xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             FadeBackgroundEnabled="False"
+             BackgroundColor="AliceBlue"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:bottomSheet="clr-namespace:BottomSheet.Core;assembly=BottomSheetXF"
+             xmlns:panacake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="TodoTask.Controls.AddTaskControl">
+    <bottomSheet:BaseBottomSheet.View>
+        <ContentView>
+            <panacake:PancakeView CornerRadius="20,20,0,0" BackgroundColor="#21262C">
+
+                <StackLayout Padding="23,25,23,23">
+
+
+                    <Frame CornerRadius="10" Padding="0">
+                        <Editor
+                            x:Name="Description"
+                            Placeholder="Remind myself of..."
+                            TextColor="White"
+                            PlaceholderColor="White"
+                            BackgroundColor="#424B56"
+                            HeightRequest="78">
+                            <Editor.Effects>
+                                <xct:RemoveBorderEffect/>
+                            </Editor.Effects>
+                        </Editor>
+                    </Frame>
+
+                    
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="xxxx"></Label>
+                    </Grid>
+
+                </StackLayout>
+
+                
+            </panacake:PancakeView>
+        </ContentView>
+    </bottomSheet:BaseBottomSheet.View>
+ 
+</bottomSheet:BaseBottomSheet>
